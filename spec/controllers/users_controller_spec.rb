@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 describe UsersController do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:other_user) { FactoryGirl.create(:user) }
-  let(:admin) { FactoryGirl.create(:admin) }
-
   describe "#new" do
     before { get :new }
     it { should respond_to :new }
@@ -17,6 +13,7 @@ describe UsersController do
 
     # A user should be able to edit his own profile
     context "your own profile" do
+      let(:user) { create(:user) }
       before { login_with user }
       before { get :edit, id: user.id }
       it { should render_template :edit }
@@ -26,6 +23,8 @@ describe UsersController do
     # A user trying to edit another user's profile should in fact edit his own,
     # unless he is admin.
     context "other user" do
+      let(:user) { create(:user) }
+      let(:other_user) { create(:user) }
       before { login_with user }
       before { get :edit, id: other_user.id }
       it { should render_template :edit }
@@ -34,6 +33,8 @@ describe UsersController do
 
     # An admin user should be able to edit another user's profile.
     context "when admin" do
+      let(:user) { create(:user) }
+      let(:admin) { create(:admin) }
       before { login_with admin }
       before { get :edit, id: user.id }
       it { should render_template :edit }
@@ -46,6 +47,7 @@ describe UsersController do
 
     # A user should be able to update his own profile
     context "your own profile" do
+      let(:user) { create(:user) }
       before { login_with user }
       before { put :update, id: user.id, user: user.attributes }
       it { assigns(:user).should eq user }
@@ -56,6 +58,8 @@ describe UsersController do
     # A user trying to edit another user's profile should in fact edit his own,
     # unless he is admin.
     context "other user" do
+      let(:user) { create(:user) }
+      let(:other_user) { create(:user) }
       before { login_with user }
       before { put :update, id: other_user.id, user: other_user.attributes }
       it { assigns(:user).should eq user }
@@ -64,6 +68,8 @@ describe UsersController do
 
     # An admin user should be able to edit another user's profile.
     context "when admin" do
+      let(:user) { create(:user) }
+      let(:admin) { create(:admin) }
       before { login_with admin }
       before { put :update, id: user.id, user: user.attributes }
       it { assigns(:user).should eq user }
@@ -76,6 +82,7 @@ describe UsersController do
 
     # A user should be able to update his own profile
     context "your own profile" do
+      let(:user) { create(:user) }
       before { login_with user }
       before { delete :destroy, id: user.id }
       it { assigns(:user).should eq user }
@@ -86,12 +93,16 @@ describe UsersController do
     # A user trying to edit another user's profile should in fact edit his own,
     # unless he is admin.
     context "other user" do
+      let(:user) { create(:user) }
+      let(:other_user) { create(:user) }
       before { login_with user }
       it { expect{ delete :destroy, id: other_user.id }.to raise_error }
     end
 
     # An admin user should be able to edit another user's profile.
     context "when admin" do
+      let(:user) { create(:user) }
+      let(:admin) { create(:admin) }
       before { login_with admin }
       before { delete :destroy, id: user.id }
       it { assigns(:user).should eq user }

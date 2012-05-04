@@ -7,6 +7,9 @@ gem 'responders'
 
 # Authentication and authorization
 gem 'cancan'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-google'
 
 # DB Related
 gem 'mongoid'
@@ -17,6 +20,7 @@ gem 'jquery-rails'
 gem 'rails-boilerplate'
 gem 'haml-rails'
 gem 'simple-navigation'
+gem 'simple_form'
 
 # Assets related
 group :assets do
@@ -34,5 +38,6 @@ group :test, :development do
   gem 'capybara'
   gem 'guard-spork'
   gem 'factory_girl_rails', :branch => :master
-  gem 'mongoid-rspec'
+  gem 'mongoid-rspec', github: "evansagge/mongoid-rspec"
+  gem 'faker'
 end
