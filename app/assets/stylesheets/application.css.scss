@@ -1,7 +1,10 @@
-@import "color_scheme";
+@import "reset";
 @import "compass";
-@import "compass/reset";
 @import "compass/utilities";
+
+@import "color_scheme";
+
+@import "typography";
 
 @import "grid";
 @import "base";
