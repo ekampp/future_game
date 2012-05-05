@@ -1,5 +1,8 @@
 @import url(http://fonts.googleapis.com/css?family=Josefin+Sans:600,400,700|Play:400,700|Allerta+Stencil)
 
+//
+// Fonts
+//
 @mixin sans-font
   font-family: 'Josefin Sans', sans-serif
 
@@ -8,3 +11,18 @@
 
 @mixin stensil-font
   font-family: 'Allerta Stencil', sans-serif
+
+//
+// Font size
+//
+@mixin normal-font-size
+  font-size: 20px
+
+//
+// Font colors
+//
+body
+  color: $font_color
+
+a, a:visited, a:hover, a:active
+  color: $alt_font_color
