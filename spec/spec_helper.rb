@@ -3,10 +3,30 @@ require 'spork'
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
+#
+# Custom matcher to check that the supplied url is present within the code and
+# within a href attribute.
+#
+RSpec::Matchers.define :have_link_to do |expected|
+  match do |actual|
+    actual.include?("href=\"#{expected}\"")
+  end
+
+  failure_message_for_should do |actual|
+    "expected #{actual} to contain link to #{expected}"
+  end
+end
+
 # Logs the given user in
 def login_with user
   controller.stub(:logged_in?).and_return true
   controller.stub(:current_user).and_return user
+end
+
+# Logs the user out
+def logout
+  controller.stub(:logged_in?).and_return false
+  controller.stub(:current_user).and_return nil
 end
 
 Spork.prefork do
@@ -38,6 +58,13 @@ Spork.prefork do
     # automatically. This will be the default behavior in future versions of
     # rspec-rails.
     config.infer_base_class_for_anonymous_controllers = true
+
+    # Makes creating objects with factory girl less verbose, by allowing the
+    # shorthand +create+ instead of +FactoryGirl.create+.
+    config.include FactoryGirl::Syntax::Methods
+
+    # Adss mongoid matchers
+    config.include Mongoid::Matchers
   end
 end
 
