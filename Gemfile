@@ -40,4 +40,5 @@ group :test, :development do
   gem 'factory_girl_rails', :branch => :master
   gem 'mongoid-rspec', github: "evansagge/mongoid-rspec"
   gem 'faker'
+  gem 'letter_opener'
 end
