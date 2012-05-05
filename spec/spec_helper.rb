@@ -11,6 +11,10 @@ RSpec::Matchers.define :have_link_to do |expected|
   match do |actual|
     actual.include?("href=\"#{expected}\"")
   end
+
+  failure_message_for_should do |actual|
+    "expected #{actual} to contain link to #{expected}"
+  end
 end
 
 # Logs the given user in
