@@ -48,18 +48,9 @@
     </div>
   </header>
 
-  <% if content_for? :sidebar %>
-    <aside class="sidebar">
-      <%= yield :sidebar %>
-    </aside>
-    <section class="content-with-sidebar">
-      <%= yield %>
-    </section>
-  <% else %>
-    <section class="content">
-      <%= yield %>
-    </section>
-  <% end %>
+  <section class="content container">
+    <%= yield %>
+  </section>
 
   <!-- JavaScript at the bottom for fast page loading: http://developer.yahoo.com/performance/rules.html#js_bottom -->
   <%= javascript_include_tag 'application' %>

@@ -2,4 +2,13 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  sessions:
+    login_messages:
+      login_required: "You must login to access that resource"
+      no_account: "No account found, matching those credentials"
+
+  user_mailer:
+    welcome:
+      subject: "Welcome to future game."
+    godbye:
+      subject: "Thank you for playing!"
