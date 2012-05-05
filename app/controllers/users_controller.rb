@@ -34,13 +34,12 @@ class UsersController < ApplicationController
   # Attempts to create a new user from post data. This requires no login, but
   # it does require the user to confirm his email, after signing up.
   #
-  # TODO: Email the user after signup, unless he signed up from an external
-  #       vendor <emil@kampp.me>
   # TODO: Create the +thanks-for-signing-up+ static html page.
   #       <emil@kampp.me>
   #
   def create
     @user = User.create(params[:user])
+    UserMailer.welcome(@user).deliver
     respond_with @user, location: "/thanks-for-signing-up"
   end
 
@@ -63,7 +62,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     raise "No user found!" unless (logged_in? and current_user == @user) or can?(:manage, User)
-    @user.destroy
+    UserMailer.godbye(@user).deliver if @user.destroy
     respond_with @user, location: can?(:manage, User) ? users_path : new_users_path
   end
 
