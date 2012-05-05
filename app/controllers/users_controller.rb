@@ -1,11 +1,22 @@
 class UsersController < ApplicationController
 
   #
+  # All actions, except for user creation process, requires that the user is
+  # logged in.
+  #
+  before_filter :require_login, :except => [ :new, :create ]
+
+  #
   # Displays form to create a new user
+  # If the user is already logged in, it will redirect him to his account page.
   #
   def new
-    @user = User.new
-    respond_with @user
+    unless logged_in?
+      @user = User.new
+      respond_with @user
+    else
+      redirect_to my_account_path
+    end
   end
 
   #
@@ -17,6 +28,20 @@ class UsersController < ApplicationController
     @user = User.find(params[:id]) if logged_in? and can?(:manage, User)
     @user ||= current_user
     respond_with @user
+  end
+
+  #
+  # Attempts to create a new user from post data. This requires no login, but
+  # it does require the user to confirm his email, after signing up.
+  #
+  # TODO: Email the user after signup, unless he signed up from an external
+  #       vendor <emil@kampp.me>
+  # TODO: Create the +thanks-for-signing-up+ static html page.
+  #       <emil@kampp.me>
+  #
+  def create
+    @user = User.create(params[:user])
+    respond_with @user, location: "/thanks-for-signing-up"
   end
 
   #

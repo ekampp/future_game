@@ -3,10 +3,26 @@ require 'spork'
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
+#
+# Custom matcher to check that the supplied url is present within the code and
+# within a href attribute.
+#
+RSpec::Matchers.define :have_link_to do |expected|
+  match do |actual|
+    actual.include?("href=\"#{expected}\"")
+  end
+end
+
 # Logs the given user in
 def login_with user
   controller.stub(:logged_in?).and_return true
   controller.stub(:current_user).and_return user
+end
+
+# Logs the user out
+def logout
+  controller.stub(:logged_in?).and_return false
+  controller.stub(:current_user).and_return nil
 end
 
 Spork.prefork do
