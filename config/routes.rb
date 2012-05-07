@@ -1,8 +1,13 @@
 FutureGame::Application.routes.draw do
 
+  # Maps the characters
+  # TODO: Move this under the users, when testing for shallow, scoped routes is
+  #       figured out. <emil@kampp.me>
+  resources :characters
+
   # Maps the user account related paths
-  resource :users, path: "account"
   match 'my_account', to: "users#edit", as: :my_account
+  resources :users, path: "account", except: [ :index, :show ]
 
   # Maps login session paths
   resource :sessions, only: [ :new, :create, :destroy ]

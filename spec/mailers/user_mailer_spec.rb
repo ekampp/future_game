@@ -27,7 +27,7 @@ describe UserMailer do
     end
 
     describe "content" do
-      it { mail.body.should match new_users_url }
+      it { mail.body.should match new_user_url }
     end
   end
 
