@@ -12,3 +12,11 @@ en:
       subject: "Welcome to future game."
     godbye:
       subject: "Thank you for playing!"
+
+  character_mailer:
+    created:
+      subject: "The legend, %{name} has been born."
+    updated:
+      subject: "%{name} has new stuff!"
+    destroyed:
+      subject: "We are sorry to tell you, but %{name} has been killed."
