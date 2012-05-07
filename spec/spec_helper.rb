@@ -17,17 +17,25 @@ RSpec::Matchers.define :have_link_to do |expected|
   end
 end
 
-# Logs the given user in
+#
+# Logs the given +user+ in by returning the +user+ object when calling the
+# +current_user+ method, and true when calling the +logged_in?+ method.
+#
 def login_with user
   controller.stub(:logged_in?).and_return true
   controller.stub(:current_user).and_return user
 end
 
-# Logs the user out
+#
+# Logs any existing user out, bu returning nil on the +current_user+ method and
+# false on the +logged_in?+ method.
+#
 def logout
   controller.stub(:logged_in?).and_return false
   controller.stub(:current_user).and_return nil
 end
+
+#
 
 Spork.prefork do
   # Loading more in this block will cause your tests to run faster. However,

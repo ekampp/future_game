@@ -1,33 +1,34 @@
-class UsersController < ApplicationController
-
-  #
-  # All actions, except for user creation process, requires that the user is
-  # logged in.
-  #
+class UsersController < InheritedResources::Base
   before_filter :require_login, :except => [ :new, :create ]
+  load_and_authorize_resource
 
   #
   # Displays form to create a new user
   # If the user is already logged in, it will redirect him to his account page.
   #
   def new
-    unless logged_in?
-      @user = User.new
-      respond_with @user
-    else
-      redirect_to my_account_path
+    new! do |format|
+      format.html do
+        if logged_in?
+          redirect_to my_account_path
+        else
+          respond_with resource
+        end
+      end
     end
   end
 
   #
-  # Displays the form for editing the users details.
-  # Per design, a user can only edit his own profile, unless he has been
-  # granted access (e.g. by being an admin).
+  # Updates the given user with the putted +user+ params.
+  # A user should not be allowed to update any other profile than his own,
+  # unless he can manage the user model.
   #
-  def edit
-    @user = User.find(params[:id]) if logged_in? and can?(:manage, User)
-    @user ||= current_user
-    respond_with @user
+  def update
+    update! do |format|
+      format.html do
+        respond_with resource, location: edit_user_path(resource)
+      end
+    end
   end
 
   #
@@ -38,20 +39,11 @@ class UsersController < ApplicationController
   #       <emil@kampp.me>
   #
   def create
-    @user = User.create(params[:user])
-    UserMailer.welcome(@user).deliver
-    respond_with @user, location: "/thanks-for-signing-up"
-  end
-
-  #
-  # Updates the given user with the putted +user+ params.
-  # A user should not be allowed to update any other profile than his own,
-  # unless he can manage the user model.
-  #
-  def update
-    @user = User.find(params[:id]) if logged_in? and can?(:manage, User)
-    @user ||= current_user
-    respond_with @user, location: edit_users_path(@user)
+    create! do |format|
+      format.html do
+        respond_with resource, location: new_character_path
+      end
+    end
   end
 
   #
@@ -60,10 +52,10 @@ class UsersController < ApplicationController
   # users profiles.
   #
   def destroy
-    @user = User.find(params[:id])
-    raise "No user found!" unless (logged_in? and current_user == @user) or can?(:manage, User)
-    UserMailer.godbye(@user).deliver if @user.destroy
-    respond_with @user, location: can?(:manage, User) ? users_path : new_users_path
+    destroy! do |format|
+      format.html do
+        respond_with resource, location: current_user.role == "admin" ? users_path : new_user_path
+      end
+    end
   end
-
 end

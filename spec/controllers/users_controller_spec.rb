@@ -32,9 +32,7 @@ describe UsersController do
     context "other user" do
       let(:user) { create(:user) }
       let(:other_user) { create(:user) }
-      before { login_with user; get :edit, id: other_user.id }
-      it { should render_template :edit }
-      it { assigns(:user).should eq user }
+      it { expect{ login_with user; get :edit, id: other_user.id }.to raise_error }
     end
 
     # An admin user should be able to edit another user's profile.
@@ -62,7 +60,7 @@ describe UsersController do
       before { login_with user }
       before { put :update, id: user.id, user: user.attributes }
       it { assigns(:user).should eq user }
-      it { should redirect_to edit_users_path(user) }
+      it { should redirect_to edit_user_path(user) }
       pending "Check that the user is in fact updated."
     end
 
@@ -72,9 +70,7 @@ describe UsersController do
       let(:user) { create(:user) }
       let(:other_user) { create(:user) }
       before { login_with user }
-      before { put :update, id: other_user.id, user: other_user.attributes }
-      it { assigns(:user).should eq user }
-      it { should redirect_to edit_users_path(user) }
+      it { expect{ put :update, id: other_user.id, user: other_user.attributes }.to raise_error }
     end
 
     # An admin user should be able to edit another user's profile.
@@ -84,7 +80,7 @@ describe UsersController do
       before { login_with admin }
       before { put :update, id: user.id, user: user.attributes }
       it { assigns(:user).should eq user }
-      it { should redirect_to edit_users_path(user) }
+      it { should redirect_to edit_user_path(user) }
     end
 
     # A user, not logged in, should not be able to access the update action
@@ -102,7 +98,7 @@ describe UsersController do
       let(:user) { build(:user) }
       before { post :create, user: user.attributes }
       it { assigns(:user).should be_a User }
-      it { should redirect_to "/thanks-for-signing-up" }
+      it { should redirect_to new_character_path }
     end
 
     context "posting bad data" do
@@ -128,7 +124,7 @@ describe UsersController do
       before { login_with user }
       before { delete :destroy, id: user.id }
       it { assigns(:user).should eq user }
-      it { should redirect_to new_users_path }
+      it { should redirect_to new_user_path }
       pending "Check that the user is in fact destroyed."
     end
 
