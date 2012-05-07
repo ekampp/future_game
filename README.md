@@ -15,6 +15,4 @@ soon.
 
 ## Helping out
 
-We are always on the lookout for people who would like to help out, so please:
-Write up issues as you find them, and if you make pull requests that woul be
-even better.
+We are always on the lookout for people who would like to help out, so please: [Read the wiki](https://github.com/ekampp/future_game/wiki) for more details on setting up your environment, testing and contributing code.
