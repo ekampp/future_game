@@ -1,14 +1,7 @@
 class User
   include Mongoid::Document
-
-  #
-  # This is to avoid loosing users permanently.
-  # A cronjob will run through this weekly, and remove users marked for
-  # deletion.
-  #
-  # TODO: Make a cronjob to rub through old, deleted users. <emil@kampp.me>
-  #
-  include Mongoid::Paranoia
+  include Mongoid::Paranoia # TODO: Make a cronjob to periodically scrub users
+                            #       marked for deletion. <emil@kampp.me>
 
   # Field definitions
   field :role, type: String, :default => "player"
