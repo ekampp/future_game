@@ -29,7 +29,7 @@ describe CharacterMailer do
     let(:mail) { CharacterMailer.updated character }
 
     context "subject" do
-      it { mail.subject.should eq "#{character.name.to_s.titleize} has new stuff!" }
+      it { mail.subject.should eq "#{character.name} has new stuff!" }
     end
 
     context "to" do
@@ -41,7 +41,7 @@ describe CharacterMailer do
     end
 
     context "body" do
-      it { mail.body.encoded.should match "#{character.name.to_s.titleize}" }
+      it { mail.body.encoded.should match "#{character.name}" }
     end
   end
 
@@ -52,7 +52,7 @@ describe CharacterMailer do
     let(:mail) { CharacterMailer.destroyed character }
 
     context "subject" do
-      it { mail.subject.should eq "We are sorry to tell you, but #{character.name.to_s.titleize} has been killed." }
+      it { mail.subject.should eq "We are sorry to tell you, but #{character.name} has been killed." }
     end
 
     context "to" do
@@ -64,7 +64,7 @@ describe CharacterMailer do
     end
 
     context "body" do
-      it { mail.body.encoded.should match "#{character.name.to_s.titleize}" }
+      it { mail.body.encoded.should match "#{character.name}" }
     end
   end
 end
