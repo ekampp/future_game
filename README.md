@@ -18,3 +18,7 @@ soon.
 We are always on the lookout for people who would like to help out, so please:
 Write up issues as you find them, and if you make pull requests that woul be
 even better.
+
+## License
+
+This project is distributed under the GNU General Public License as described in our [licensing wiki section](https://github.com/ekampp/future_game/wiki/Licencing). and in the LICENSE.md file.
