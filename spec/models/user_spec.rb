@@ -8,6 +8,7 @@ describe User do
   it { should have_field(:provider).of_type(String) }
   it { should have_field(:uid).of_type(String) }
   it { should have_field(:info).of_type(Hash) }
+  it { should have_field(:banned).of_type(Boolean).with_default_value_of(false) }
 
   # Indexes
   it { should have_index_for(:email).with_options(:unique => true) }

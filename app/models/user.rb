@@ -9,6 +9,7 @@ class User
   field :provider, type: String
   field :uid, type: String
   field :info, type: Hash
+  field :banned, type: Boolean, default: false
 
   # Indexes
   index :uid, unique: true
