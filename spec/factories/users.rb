@@ -11,4 +11,8 @@ FactoryGirl.define do
   factory :admin, parent: :user do
     role "admin"
   end
+
+  factory :banned_user, parent: :user do
+    banned true
+  end
 end

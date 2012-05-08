@@ -15,4 +15,12 @@ soon.
 
 ## Helping out
 
-We are always on the lookout for people who would like to help out, so please: [Read the wiki](https://github.com/ekampp/future_game/wiki) for more details on setting up your environment, testing and contributing code.
+We are always on the lookout for people who would like to help out, so please:
+[Read the wiki](https://github.com/ekampp/future_game/wiki) for more details on
+setting up your environment, testing and contributing code.
+
+## License
+
+This project is distributed under the GNU General Public License as described
+in our [licensing wiki section](https://github.com/ekampp/future_game/wiki/Licencing),
+and in the LICENSE.md file.
