@@ -20,15 +20,9 @@ class User
   has_many :characters
 
   # Validations
-  validates :email,
-    presence: true,
-    uniqueness: { :case_sensitive => false }
-  validates :uid,
-    presence: true,
-    uniqueness: true
-  validates :provider,
-    presence: true
-  validates :role,
-    inclusion: { in: %w(player admin) }
+  validates :email, presence: true, uniqueness: { :case_sensitive => false }
+  validates :uid, presence: true, uniqueness: true
+  validates :provider, presence: true
+  validates :role, inclusion: { in: %w(player admin) }
 
 end
