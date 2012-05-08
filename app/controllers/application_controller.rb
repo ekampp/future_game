@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   # computer.
   #
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id].present?
+    @current_user ||= User.find(session[:user_id]) rescue nil if session[:user_id].present?
   end
 
   #
