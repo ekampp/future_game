@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     @user = User.find_or_initialize_by auth_hash
     if @user.present? and @user.save
       self.current_user = @user
-      redirect_to stored_location
+      redirect_to get_stored_location
     else
       render :new
     end

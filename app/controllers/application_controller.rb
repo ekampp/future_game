@@ -21,7 +21,37 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id].present?
   end
 
-protected
+  #
+  # Sets the +current_user+, effectively logging him in.
+  #
+  def current_user= user
+    if user.present? and user.valid?
+      session[:user_id] = user.id
+      @current_user = user
+    end
+  end
+
+  #
+  # Stores the current location
+  #
+  # Options
+  #   * +force+ will force the current location as the stored one.
+  #
+  def store_location location = nil
+    session[:stored_location] = location || request.fullpath
+  end
+
+  #
+  # Gets the stored location.
+  # If there is no stored location, this will default to (1) the
+  # +my_account_path+ or (2) the +root_path+.
+  #
+  def get_stored_location
+    loc = session[:stored_location]
+    loc ||= my_account_path if logged_in?
+    loc ||= root_path
+    loc
+  end
 
   #
   # Ensures that the user is logged in, before proceeding
@@ -37,27 +67,5 @@ protected
   def access_denied msg = "login_required"
     store_location
     redirect_to login_path(msg: msg) and return
-  end
-
-  #
-  # Stores the current location
-  #
-  # Options
-  #   * +force+ will force the current location as the stored one.
-  #
-  def store_location force = false
-    session[:stored_location] =  request.fullpath if session[:stored_location].nil? or force
-  end
-
-  #
-  # Gets the stored location.
-  # If there is no stored location, this will default to (1) the
-  # +my_account_path+ or (2) the +root_path+.
-  #
-  def get_stored_location
-    loc = session[:stored_location]
-    loc ||= my_account_path
-    loc ||= root_path
-    loc
   end
 end

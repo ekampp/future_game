@@ -10,6 +10,25 @@ describe SessionsController do
   #
   describe "#create" do
     it { should respond_to :create }
+      before { controller.stub(:auth_hash).and_return {} }
+
+    describe "when existing user" do
+      let(:user) { create :user }
+      before { User.stub(:find_or_initialize_by).and_return user }
+      before { controller.current_user = user; post :create }
+
+      context "variables" do
+        it { assigns(:user).should eq user }
+        it { controller.current_user.should eq user }
+        it { session[:user_id].should eq user.id }
+      end
+
+      context "should redirect to stored location" do
+        before { controller.stub(:get_stored_location).and_return "/hej" }
+        it { pending "TODO: Apparently the controller stub is not working properly. <emil@kampp.me>";
+          response.should redirect_to "/hej" }
+      end
+    end
   end
 
   describe "#new" do
