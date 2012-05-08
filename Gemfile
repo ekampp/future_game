@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # App related
-gem 'rails', '3.2.3'
+gem 'rails', '~> 3.2.3'
 gem 'thin'
 gem 'responders'
 gem 'inherited_resources'
