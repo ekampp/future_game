@@ -11,8 +11,7 @@ describe "users/new" do
   end
 
   describe "vendor logins" do
-    pending "Uncomment this, when the signup form has been completed"
-    # it { rendered.should have_selector "a#facebook_login" }
-    # it { rendered.should have_selector "a#twitter_login" }
+    it { pending "Facebook omniauth needs setup"; rendered.should have_selector "a#facebook_login" }
+    it { pending "Twitter omniauth needs setup"; rendered.should have_selector "a#twitter_login" }
   end
 end
