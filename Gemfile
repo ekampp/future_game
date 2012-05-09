@@ -42,4 +42,5 @@ group :test, :development do
   gem 'mongoid-rspec', github: "evansagge/mongoid-rspec"
   gem 'faker'
   gem 'letter_opener'
+  gem 'quiet_assets'
 end
