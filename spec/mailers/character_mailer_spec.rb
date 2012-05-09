@@ -11,7 +11,7 @@ describe CharacterMailer do
     end
 
     context "to" do
-      it { mail.to.first.should eq character.user.email }
+      it { mail.to.first.to_s.should eq character.user.info[:email].to_s }
     end
 
     context "from" do
@@ -33,7 +33,7 @@ describe CharacterMailer do
     end
 
     context "to" do
-      it { mail.to.first.should eq character.user.email }
+      it { mail.to.first.should eq character.user.info[:email] }
     end
 
     context "from" do
@@ -56,7 +56,7 @@ describe CharacterMailer do
     end
 
     context "to" do
-      it { mail.to.first.should eq character.user.email }
+      it { mail.to.first.should eq character.user.info[:email] }
     end
 
     context "from" do

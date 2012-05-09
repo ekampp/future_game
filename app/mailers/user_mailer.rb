@@ -7,7 +7,7 @@ class UserMailer < ActionMailer::Base
   #
   def welcome user
     @user = user
-    mail to: user.email
+    mail to: user.info[:email]
   end
 
   #
@@ -16,6 +16,6 @@ class UserMailer < ActionMailer::Base
   #
   def godbye user
     @user = user
-    mail to: user.email
+    mail to: user.info[:email]
   end
 end

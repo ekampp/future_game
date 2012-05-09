@@ -2,8 +2,10 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_or_initialize_by auth_hash
+    logger.debug "Found user: #{@user.inspect}"
     if @user.present? and @user.save
       self.current_user = @user
+      logger.debug "Stored location: #{get_stored_location}"
       redirect_to get_stored_location
     else
       render :new

@@ -7,7 +7,7 @@ class CharacterMailer < ActionMailer::Base
   #
   def created character
     @character = character
-    mail to: character.user.email, subject: t('character_mailer.created.subject', name: character.name)
+    mail to: character.user.info[:email], subject: t('character_mailer.created.subject', name: character.name)
   end
 
   #
@@ -16,7 +16,7 @@ class CharacterMailer < ActionMailer::Base
   #
   def updated character
     @character = character
-    mail to: character.user.email, subject: t('character_mailer.updated.subject', name: character.name)
+    mail to: character.user.info[:email], subject: t('character_mailer.updated.subject', name: character.name)
   end
 
   #
@@ -24,6 +24,6 @@ class CharacterMailer < ActionMailer::Base
   #
   def destroyed character
     @character = character
-    mail to: character.user.email, subject: t('character_mailer.destroyed.subject', name: character.name)
+    mail to: character.user.info[:email], subject: t('character_mailer.destroyed.subject', name: character.name)
   end
 end

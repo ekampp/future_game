@@ -7,7 +7,7 @@ describe UserMailer do
 
     describe "headers" do
       it { mail.subject.should eq("Welcome to future game.") }
-      it { mail.to.first.should eq user.email }
+      it { mail.to.first.should eq user.info[:email] }
       it { mail.from.first.should eq "do-not-reply@future-game.com" }
     end
 
@@ -22,12 +22,12 @@ describe UserMailer do
 
     describe "headers" do
       it { mail.subject.should eq("Thank you for playing!") }
-      it { mail.to.first.should eq user.email }
+      it { mail.to.first.should eq user.info[:email] }
       it { mail.from.first.should eq "do-not-reply@future-game.com" }
     end
 
     describe "content" do
-      it { mail.body.should match new_user_url }
+      it { mail.body.should match login_url }
     end
   end
 

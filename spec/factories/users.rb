@@ -2,10 +2,10 @@
 
 FactoryGirl.define do
   factory :user do
-    sequence(:uid) { |n| "#{n}#{Faker::Base.bothify("##??##??##")}" }
-    provider Faker::Internet.user_name
-    sequence(:email) { |n| "#{n}-#{Faker::Internet.email}" }
+    sequence(:provider) { |n| "#{n}_#{Faker::Internet.user_name}" }
+    sequence(:uid) { |n| "#{n}-#{Faker::Internet.email}" }
     role "player"
+    sequence(:info) { |n| { email: "#{n}-#{Faker::Internet.email}", name: Faker::Name.name }}
   end
 
   factory :admin, parent: :user do

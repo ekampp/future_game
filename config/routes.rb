@@ -7,7 +7,7 @@ FutureGame::Application.routes.draw do
 
   # Maps the user account related paths
   match 'my_account', to: "users#edit", as: :my_account
-  resources :users, path: "account", except: [ :index, :show ]
+  resources :users, path: "account", only: [ :update, :destroy, :edit ]
 
   # Maps login session paths
   resource :sessions, only: [ :new, :create, :destroy ]
