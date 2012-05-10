@@ -18,7 +18,7 @@ gem 'bson_ext'
 
 # UI Related
 gem 'jquery-rails'
-gem 'rails-boilerplate'
+gem 'rails-boilerplate', github: "khelben/rails-boilerplate"
 gem 'haml-rails'
 gem 'simple-navigation'
 gem 'simple_form'

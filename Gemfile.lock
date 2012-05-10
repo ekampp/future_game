@@ -7,6 +7,12 @@ GIT
       rake
       rspec (~> 2.9)
 
+GIT
+  remote: git://github.com/khelben/rails-boilerplate.git
+  revision: bd247eded5de1c6ecb4ba1e443b9dbc864e03e1e
+  specs:
+    rails-boilerplate (0.1.9)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -168,7 +174,6 @@ GEM
       activesupport (= 3.2.3)
       bundler (~> 1.0)
       railties (= 3.2.3)
-    rails-boilerplate (0.1.9)
     railties (3.2.3)
       actionpack (= 3.2.3)
       activesupport (= 3.2.3)
@@ -257,7 +262,7 @@ DEPENDENCIES
   omniauth-twitter
   quiet_assets
   rails (~> 3.2.3)
-  rails-boilerplate
+  rails-boilerplate!
   responders
   rspec-rails (~> 2.6)
   sass-rails (~> 3.2.3)
