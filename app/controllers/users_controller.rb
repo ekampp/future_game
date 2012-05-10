@@ -27,4 +27,15 @@ class UsersController < InheritedResources::Base
       end
     end
   end
+
+protected
+
+  #
+  # Fetches a single resource
+  #
+  def resource
+    @user ||= current_user
+    @user = User.find(params[:id]) if params[:id].present? and can? :manage, User
+    @user
+  end
 end

@@ -11,7 +11,6 @@ class User
   field :banned, type: Boolean, default: false
 
   # Indexes
-  index :uid, unique: true
   index :provider
   index :role
 
@@ -19,7 +18,7 @@ class User
   has_many :characters
 
   # Validations
-  validates :uid, presence: true, uniqueness: true
+  # validates :uid, presence: true, uniqueness: true
   validates :provider, presence: true
   validates :role, inclusion: { in: %w(player admin) }
 

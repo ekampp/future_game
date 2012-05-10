@@ -11,12 +11,11 @@ describe User do
 
   # Indexes
   it { should have_index_for(:provider) }
-  it { should have_index_for(:uid).with_options(:unique => true) }
   it { should have_index_for(:role) }
 
   # Validations
-  it { should validate_presence_of(:uid) }
-  it { should validate_uniqueness_of(:uid) }
+  # it { should validate_presence_of(:uid) }
+  # it { should validate_uniqueness_of(:uid) }
   it { should validate_presence_of(:provider) }
   it { should validate_inclusion_of(:role).to_allow("player", "admin") }
 

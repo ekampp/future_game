@@ -1,11 +1,12 @@
 class SessionsController < ApplicationController
+  skip_before_filter :verify_authenticity_token, only: :create
 
   def create
     @user = User.find_or_initialize_by auth_hash
-    logger.debug "Found user: #{@user.inspect}"
+    logger.debug { "SESSION CONTROLLER: Identified user #{@user.inspect} from auth hash." }
     if @user.present? and @user.save
-      self.current_user = @user
-      logger.debug "Stored location: #{get_stored_location}"
+      logger.debug { "SESSION CONTROLLER: Logging in user #{@user.id}" }
+      session[:user_id] = @user.id
       redirect_to get_stored_location
     else
       render :new
@@ -18,6 +19,11 @@ class SessionsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def destroy
+    session[:user_id] = nil
+    redirect_to root_path
   end
 
 protected

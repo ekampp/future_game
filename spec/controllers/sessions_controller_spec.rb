@@ -40,4 +40,12 @@ describe SessionsController do
       it { should render_template :new }
     end
   end
+
+  describe "#destroy" do
+    it { should respond_to :destroy }
+
+    before { get :destroy }
+    it { session[:user_id].should be_nil }
+    it { response.should redirect_to root_path }
+  end
 end

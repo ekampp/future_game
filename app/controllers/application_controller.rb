@@ -18,17 +18,8 @@ class ApplicationController < ActionController::Base
   # computer.
   #
   def current_user
+    logger.debug { "APP CONTROLLER: Current user_id session: #{session[:user_id]}." }
     @current_user ||= User.find(session[:user_id]) rescue nil if session[:user_id].present?
-  end
-
-  #
-  # Sets the +current_user+, effectively logging him in.
-  #
-  def current_user= user
-    if user.present? and user.valid?
-      session[:user_id] = user.id
-      @current_user = user
-    end
   end
 
   #
@@ -54,7 +45,13 @@ class ApplicationController < ActionController::Base
   end
 
   #
-  # Ensures that the user is logged in, before proceeding
+  # Ensures that the user is logged in before proceeding.
+  # This should be used as a before filter, to ensure that the content is only
+  # visible to users that are logged in.
+  #
+  # Examples:
+  #
+  #   * before_filter :require_login
   #
   def require_login
     access_denied unless logged_in?

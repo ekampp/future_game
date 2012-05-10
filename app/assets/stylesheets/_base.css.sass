@@ -9,8 +9,10 @@ a, a:active, a:hover, a:visited
 // Bring back that hot pink.
 ::-moz-selection
   background: $selection_color
+  color: lighten($selection_color, 60) !important
 ::selection
   background: $selection_color
+  color: lighten($selection_color, 60) !important
 html.textshadow
   ::selection
     text-shadow: none
