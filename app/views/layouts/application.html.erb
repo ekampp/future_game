@@ -39,16 +39,22 @@
   <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 
   <!-- Add your site or application content here -->
-  <header class="header main-header container">
+  <header class="container" id="main-header">
     <div class="row">
-      <div class="app-name eightcol">
-        <%= render_navigation level: 1 %>
+      <div class="twelvecol">
+        <h1 id="app-title">
+          Future Game
+        </h1>
       </div>
-      <div class="app-logo fourcol last">Logo</div>
+    </div>
+    <div class="row">
+      <nav class="twelvecol">
+        <%= render_navigation level: 1 %>
+      </nav>
     </div>
   </header>
 
-  <section class="content container">
+  <section class="container" id="main-content">
     <%= yield %>
   </section>
 
